@@ -2,9 +2,6 @@ import pygame
 import os
 import random
 
-
-#super(), blit()
-
 pygame.init()
 
 # Константы
@@ -130,10 +127,11 @@ class Cloud:
     def draw(self, SCREEN):  # отрисовка
         SCREEN.blit(self.image, (self.x, self.y))
 
+
 class Obstacle:
     def __init__(self, image, type):
         self.image = image
-        self.type = type #(значение от 0 до 2)
+        self.type = type  # (значение от 0 до 2)
         self.rect = self.image[self.type].get_rect()
         self.rect.x = SCREEN_WIDTH
 
@@ -170,7 +168,7 @@ class Bird(Obstacle):
     def draw(self, SCREEN):
         if self.index >= 9:
             self.index = 0
-        SCREEN.blit(self.image[self.index//5], self.rect)
+        SCREEN.blit(self.image[self.index // 5], self.rect)
         self.index += 1
 
 
@@ -220,7 +218,7 @@ def main():
         player.draw(SCREEN)  # Отрисовка игрока
         player.update(userInput)  # обновление динозавра на каждой итерации
 
-        if len(obstacles) == 0: # вызов препятствий
+        if len(obstacles) == 0:  # вызов препятствий
             if random.randint(0, 2) == 0:
                 obstacles.append(SmallCactus(SMALL_CACTUS))
             elif random.randint(0, 2) == 1:
@@ -231,7 +229,6 @@ def main():
             obstacle.draw(SCREEN)
             obstacle.update()
             if player.dino_rect.colliderect(obstacle.rect):
-                #pygame.time.delay(1000)
                 death_count += 1
                 menu(death_count)
 
@@ -250,7 +247,7 @@ def menu(death_count):
     global points
     run = True
     while run:
-        SCREEN.fill((255, 255, 255)) #белый фон и текст для меню
+        SCREEN.fill((255, 255, 255))  # белый фон и текст для меню
         font = pygame.font.Font('freesansbold.ttf', 30)
 
         if death_count == 0:
